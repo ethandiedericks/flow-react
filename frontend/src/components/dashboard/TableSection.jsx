@@ -63,7 +63,9 @@ const TableSection = ({ initialTableData, updateChartData }) => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-2xl font-semibold text-gray-900">Table Section</h2>
+      <h2 className="text-2xl font-semibold text-gray-900">Transactions</h2>
+      <p className="text-sm font-medium text-gray-600 italic">(Click on a record to update)</p>
+
       <div className="mt-4">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

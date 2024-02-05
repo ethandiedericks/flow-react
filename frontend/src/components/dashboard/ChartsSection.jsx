@@ -27,7 +27,7 @@ const ChartsSection = ({ incomeTotal, expenseTotal, investmentTotal }) => {
       {/* Bar Chart */}
       <div className="bg-white overflow-hidden shadow rounded-lg">
         <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900">Income and Expenses (Bar Chart)</h3>
+          <h3 className="text-lg font-medium text-gray-900">Income vs Expenses vs Investments</h3>
           <ApexCharts options={barChartOptions} series={[{ name: 'Amount', data: [incomeTotal, expenseTotal, investmentTotal] }]} type="bar" height={300} />
         </div>
       </div>
@@ -35,7 +35,7 @@ const ChartsSection = ({ incomeTotal, expenseTotal, investmentTotal }) => {
       {/* Doughnut Chart */}
       <div className="bg-white overflow-hidden shadow rounded-lg">
         <div className="p-5">
-          <h3 className="text-lg font-medium text-gray-900">Investments (Doughnut Chart)</h3>
+          <h3 className="text-lg font-medium text-gray-900">Income vs Expenses vs Investments</h3>
           <ApexCharts options={doughnutChartOptions} series={doughnutChartData} type="donut" height={300} />
         </div>
       </div>

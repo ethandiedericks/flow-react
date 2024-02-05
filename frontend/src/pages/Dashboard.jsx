@@ -111,7 +111,7 @@ const updateChartDataAndCards = async (updatedRowData) => {
                 </svg>
               }
               title="Income"
-              amount={budgetSummary?.income_total || 0}
+              amount={budgetSummary?.income_total?.toFixed(2) || 0}
             />
 
             {/* Card 2 (Expenses) */}
@@ -131,7 +131,7 @@ const updateChartDataAndCards = async (updatedRowData) => {
                 </svg>
               }
               title="Expenses"
-              amount={budgetSummary?.expense_total?.toFixed(2) || 'Loading...'}
+              amount={budgetSummary?.expense_total?.toFixed(2) || 0}
             />
 
             {/* Card 3 (Investments) */}
@@ -151,7 +151,7 @@ const updateChartDataAndCards = async (updatedRowData) => {
                 </svg>
               }
               title="Investments"
-              amount={budgetSummary?.investment_total?.toFixed(2) || 'Loading...'}
+              amount={budgetSummary?.investment_total?.toFixed(2) || 0}
             />
           </div>
 
