@@ -78,18 +78,18 @@ const CreateTransactionForm = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="backdrop-blur-sm">
       <div className="flex flex-col justify-center items-center">
         {successToast && <ToastSuccess message="Transaction added successfully!" />}
       </div>
 
       <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new transaction</h2>
+        <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-gray-900">Add a new transaction</h2>
         <form onSubmit={handleSubmit}>
           {/* Transaction Type Select */}
           <div className="mb-4">
             <label htmlFor="transactionType" className="block text-sm font-medium text-gray-600">Transaction Type</label>
-            <select id="transactionType" name="transaction_type" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none" onChange={handleChange}>
+            <select id="transactionType" name="transaction_type" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none" onChange={handleChange}>
               <option value="income">Income</option>
               <option value="expense">Expense</option>
               <option value="investment">Investment</option>
@@ -102,7 +102,7 @@ const CreateTransactionForm = () => {
               type="text"
               id="transactionName"
               name="transaction_name"
-              className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none ${errors.transaction_name && 'border-red-500'}`}
+              className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none ${errors.transaction_name && 'border-red-500'}`}
               placeholder="Name of transaction (eg. Food)"
               onChange={handleChange}
             />
@@ -118,7 +118,7 @@ const CreateTransactionForm = () => {
                 type="number"
                 id="amount"
                 name="transaction_amount"
-                className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none ${errors.transaction_amount && 'border-red-500'}`}
+                className={`shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none ${errors.transaction_amount && 'border-red-500'}`}
                 placeholder="R25000"
                 onChange={handleChange}
               />
@@ -133,7 +133,7 @@ const CreateTransactionForm = () => {
                 type="date"
                 id="transactionDate"
                 name="future_transaction_date"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:shadow-sm-light focus:outline-none"
+                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none"
                 onChange={handleChange}
               />
             </div>
@@ -142,7 +142,7 @@ const CreateTransactionForm = () => {
           <div className="mt-4">
             <button
               type="submit"
-              className="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
               Submit
             </button>

@@ -1,10 +1,11 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const GridCard = ({ color, icon, title, amount }) => {
   const amountValue = typeof amount === 'string' ? parseFloat(amount) : amount;
 
   return (
-    <div className={`bg-white overflow-hidden shadow-lg rounded-lg border-l-4 border-${color}-500`}>
+    <div className={`bg-white overflow-hidden shadow-lg rounded-lg border-l-4 ${color === 'green' ? 'border-green-500' : color === 'red' ? 'border-red-500' : color === 'blue' ? 'border-blue-500' : ''} temp-bg-blue-500`}>
       <div className="p-6 flex items-center">
         <div className={`mr-4 text-${color}-500`}>{icon}</div>
         <div>

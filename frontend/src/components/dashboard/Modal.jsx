@@ -134,11 +134,11 @@ const Modal = ({ isOpen, onClose, rowData, onUpdateRow }) => {
 
       {/* Modal */}
       <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-        <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 w-full max-w-md max-h-full mx-auto my-6 ">
+        <div className="relative bg-white rounded-lg shadow dark:bg-white w-full max-w-md max-h-full mx-auto my-6 ">
 
           {/* Modal Header */}
           <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{rowData.transaction_name}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-900">{rowData.transaction_name}</h3>
             <button
               className="p-1 ml-auto bg-transparent border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
               onClick={onClose}
@@ -159,8 +159,9 @@ const Modal = ({ isOpen, onClose, rowData, onUpdateRow }) => {
                   id="transactionType"
                   name="transaction_type"
                   value={updatedData.transaction_type}
-                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   onChange={handleInputChange}
+                  autoFocus
                 >
                   <option value="income">Income</option>
                   <option value="expense">Expense</option>
@@ -175,7 +176,7 @@ const Modal = ({ isOpen, onClose, rowData, onUpdateRow }) => {
                   type="text" id="transactionName"
                   name="transaction_name"
                   value={updatedData.transaction_name}
-                  className={`w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.transaction_name && 'border-red-500'}`}
+                  className={`w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.transaction_name && 'border-red-500'}`}
                   placeholder="Name of transaction (eg. Food)"
                   onChange={handleInputChange}
                 />
@@ -194,7 +195,7 @@ const Modal = ({ isOpen, onClose, rowData, onUpdateRow }) => {
                     id="amount"
                     name="transaction_amount"
                     value={updatedData.transaction_amount}
-                    className={`w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.transaction_amount && 'border-red-500'}`}
+                    className={`w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500 ${errors.transaction_name && 'border-red-500'}`}
                     placeholder="R25000"
                     onChange={handleInputChange}
                   />
@@ -212,7 +213,7 @@ const Modal = ({ isOpen, onClose, rowData, onUpdateRow }) => {
                     name="future_transaction_date"
                     value={updatedData.future_transaction_date ? updatedData.future_transaction_date.split('T')[0] : ''}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     onChange={handleInputChange}
                   />
                 </div>

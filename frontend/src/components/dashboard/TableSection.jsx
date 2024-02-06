@@ -7,10 +7,10 @@ const TableRow = ({ rowData, onClick }) => {
 
   return (
     <tr
-      className={`cursor-pointer bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600`}
+      className={`cursor-pointer bg-white border-b dark:bg-white  hover:bg-gray-50 dark:hover:bg-gray-50`}
       onClick={() => onClick(rowData)}
     >
-      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+      <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-900">
         {transaction_type}
       </th>
       <td className="px-6 py-4">{transaction_name}</td>
@@ -68,8 +68,8 @@ const TableSection = ({ initialTableData, updateChartData }) => {
 
       <div className="mt-4">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-500">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-50 dark:text-gray-700">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Transaction Type

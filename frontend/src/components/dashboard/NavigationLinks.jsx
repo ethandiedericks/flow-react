@@ -2,7 +2,7 @@ import classNames from './classNames';
 import PropTypes from 'prop-types'
 
 const NavigationLinks = ({ items }) => (
-  <div className="ml-10 flex items-baseline space-x-4">
+  <div className="ml-10 flex items-center justify-center space-x-4">
     {items.map((item) => (
       <a
         key={item.name}
