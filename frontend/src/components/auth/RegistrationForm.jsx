@@ -21,7 +21,12 @@ const RegistrationForm = () => {
           initialValues={{ email: '', password: '', confirm_password: '' }}
           validationSchema={Yup.object({
             email: Yup.string().email('Invalid email address').required('Email is required'),
-            password: Yup.string().required('Password is required'),
+            password: Yup.string()
+              .required('Password is required')
+              .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                'Password must contain uppercase and lowercase letters, numbers, and special characters'
+              ),
             confirm_password: Yup.string()
               .oneOf([Yup.ref('password'), null], 'Passwords must match')
               .required('Confirm Password is required'),
