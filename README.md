@@ -18,6 +18,7 @@ Flow Finance is a financial management system that allows users to track their i
 - **Backend:**
   - Django
   - Django Rest Framework
+  - Simple JWT for Authentication
 
 ## ⚙️ Setup -> Backend
 
@@ -43,32 +44,28 @@ To set up Flow Finance locally, follow these steps:
    ```bash
    pip install -r requirements.txt
    ```
-6. Enter backend directory:
-    ```bash
-    cd backend
-    ```
-7. Create a copy of the .env.template file and name it .env:
+6. Create a copy of the .env.template file and name it .env:
    ```bash
    cp .env.template .env
    ```
 
-8. Generate new Django secret key: 
+7. Generate new Django secret key: 
     ```bash
     python generate_secret_key.py
     ```
-9. Make migrations:
+8. Make migrations:
    ```bash
    python manage.py makemigrations
    ```
-10. Apply migrations:
+9. Apply migrations:
     ```bash
     python manage.py migrate
     ```
-11. Create a superuser:
+10. Create a superuser:
     ```bash
     python manage.py createsuperuser
     ```
-12. Start the development server:
+11. Start the development server:
     ```bash
     python manage.py runserver
     ```
