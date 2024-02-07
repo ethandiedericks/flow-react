@@ -1,22 +1,32 @@
+# Standard library imports
+from datetime import timedelta
+import uuid
+
+# Django imports
+from django.conf import settings
 from django.core.mail import send_mail
-from django.contrib.auth import get_user_model
-from django.db.models import Sum
-from django.contrib.auth.tokens import default_token_generator
+from django.urls import reverse
+from django.utils import timezone
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth import get_user_model
+from django.contrib.auth.tokens import default_token_generator
+from django.db.models import Sum
 
-
+# Third-party imports
 from rest_framework import generics, permissions, status
-from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 
+# Local imports
 from .models import Transaction
+from .serializers import TransactionSerializer
 from users.serializers import UserSerializer
-from .serializers import (
-    PasswordResetSerializer,
-    TransactionSerializer,
-)
+from .serializers import PasswordResetSerializer
+
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 
 class UserRegistrationView(generics.CreateAPIView):
@@ -60,39 +70,6 @@ class BlacklistTokenView(APIView):
             return Response(
                 {"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-
-
-class PasswordResetView(APIView):
-    def post(self, request, *args, **kwargs):
-        User = get_user_model()
-        serializer = PasswordResetSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        email = serializer.validated_data["email"]
-
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            return Response(
-                {"error": "User not found"}, status=status.HTTP_404_NOT_FOUND
-            )
-
-        uid = urlsafe_base64_encode(force_bytes(user.pk))
-
-        token = default_token_generator.make_token(user)
-
-        reset_link = f"http://localhost:3000/reset-password/{uid}/{token}/"
-
-        send_mail(
-            "Password Reset",
-            f"Click the following link to reset your password: {reset_link}",
-            "from@example.com",
-            [email],
-            fail_silently=False,
-        )
-
-        return Response(
-            {"message": "Password reset email sent. Check your email for instructions."}
-        )
 
 
 class TransactionListCreateView(generics.ListCreateAPIView):
@@ -191,3 +168,91 @@ class BudgetSummaryView(generics.RetrieveAPIView):
         }
 
         return Response(data)
+
+
+User = get_user_model()
+
+
+class PasswordResetRequestView(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "User with this email does not exist"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        # Generate and save token
+        token = uuid.uuid4().hex
+        user.password_reset_token = token
+        user.password_reset_token_created_at = timezone.now()
+        user.save()
+
+        # Send email with reset link
+        reset_link = f"http://localhost:5173/password-confirm/{token}/"
+
+        # Create Mail object
+        message = Mail(
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to_emails=email,
+            subject="Password Reset Request",
+            plain_text_content=f"Click the following link to reset your password: {reset_link}",
+        )
+
+        try:
+            # Send email using SendGrid API
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            response = sg.send(message)
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+        except Exception as e:
+            return Response(
+                {"error": "Failed to send password reset email"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+        return Response(
+            {"message": "Password reset email sent"}, status=status.HTTP_200_OK
+        )
+
+
+class PasswordResetConfirmView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, token):
+        try:
+            user = User.objects.get(password_reset_token=token)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response({"email": user.email}, status=status.HTTP_200_OK)
+
+    def post(self, request, token):
+        password = request.data.get("password")
+        try:
+            user = User.objects.get(password_reset_token=token)
+        except User.DoesNotExist:
+            return Response(
+                {"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check token expiration
+        if user.password_reset_token_created_at + timedelta(hours=1) < timezone.now():
+            return Response(
+                {"error": "Token expired"}, status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Reset password
+        user.set_password(password)
+        user.password_reset_token = None
+        user.password_reset_token_created_at = None
+        user.save()
+
+        return Response(
+            {"message": "Password reset successful"}, status=status.HTTP_200_OK
+        )

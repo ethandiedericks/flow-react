@@ -12,8 +12,10 @@ const RegistrationForm = () => {
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <img className="mx-auto h-10 w-auto" src={logo} alt="Flow" />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for an your account</h2>
+        <Link to='/'>
+          <img className="mx-auto h-10 w-auto" src={logo} alt="Flow" />
+        </Link>
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for an account</h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -77,6 +79,7 @@ const RegistrationForm = () => {
                   id="password"
                   name="password"
                   autoComplete="new-password"
+                  placeholder="password"
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none"
                 />
                 <ErrorMessage name="password" component="p" className="mt-1 text-xs text-red-500" />
@@ -91,6 +94,7 @@ const RegistrationForm = () => {
                   id="confirm_password"
                   name="confirm_password"
                   autoComplete="new-password"
+                  placeholder="confirm password"
                   className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-green-500 focus:border-2 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-300 dark:placeholder-gray-400 dark:text-gray-900 dark:shadow-sm focus:outline-none"
                 />
                 <ErrorMessage name="confirm_password" component="p" className="mt-1 text-xs text-red-500" />

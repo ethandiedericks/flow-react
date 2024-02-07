@@ -9,12 +9,13 @@ from rest_framework_simplejwt.views import (
 from .views import (
     UserRegistrationView,
     BlacklistTokenView,
-    PasswordResetView,
     TransactionListCreateView,
     TransactionDetailView,
     BudgetSummaryView,
     TransactionDeleteView,
     TransactionUpdateView,
+    PasswordResetRequestView,
+    PasswordResetConfirmView,
 )
 
 urlpatterns = [
@@ -25,8 +26,17 @@ urlpatterns = [
     path("token/blacklist/", BlacklistTokenView.as_view(), name="token_blacklist"),
     # User registration endpoint
     path("register/", UserRegistrationView.as_view(), name="user-registration"),
-    # Password reset endpoint
-    path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
+    # Password reset endpoints
+    path(
+        "password/reset/",
+        PasswordResetRequestView.as_view(),
+        name="password_reset_request",
+    ),
+    path(
+        "password/reset/confirm/<str:token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password_reset_confirm",
+    ),
     # Transaction endpoints
     path(
         "transactions/",

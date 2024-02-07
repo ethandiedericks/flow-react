@@ -137,7 +137,7 @@ const updateChartDataAndCards = async (updatedRowData) => {
                   strokeLinejoin="round"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="#2563eb"
                 >
                   <path d="M21 6l-7.5 12L3 6" />
                 </svg>
