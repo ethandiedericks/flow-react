@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://djangoflowbackend-env.eba-a7mhcypq.af-south-1.elasticbeanstalk.com/api/';
+const baseURL = 'http://localhost:8000/api/';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
